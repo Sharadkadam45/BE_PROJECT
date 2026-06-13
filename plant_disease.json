@@ -1,0 +1,72 @@
+[
+    {
+        "name": "Tomato___Bacterial_spot",
+        "name_hindi": "टमाटर जीवाणु धब्बा",
+        "cause": "Bacterium Xanthomonas spp.",
+        "cure": "Apply copper-based bactericides and practice crop rotation.",
+        "medicine_link": "https://www.amazon.in/s?k=tomato+bacterial+spot+fungicide&sort=popularity-rank"
+    },
+    {
+        "name": "Tomato___Early_blight",
+        "name_hindi": "टमाटर जल्दी झुलसा",
+        "cause": "Fungus Alternaria solani.",
+        "cure": "Apply fungicides and remove infected leaves.",
+        "medicine_link": "https://www.amazon.in/s?k=tomato+early+blight+fungicide&sort=popularity-rank"
+    },
+    {
+        "name": "Tomato___Late_blight",
+        "name_hindi": "टमाटर देरी झुलसा",
+        "cause": "Pathogen Phytophthora infestans.",
+        "cure": "Use resistant varieties and fungicides.",
+        "medicine_link": "https://www.amazon.in/s?k=tomato+late+blight+fungicide&sort=popularity-rank"
+    },
+    {
+        "name": "Tomato___Leaf_Mold",
+        "name_hindi": "टमाटर पत्ती ढाले",
+        "cause": "Fungus Passalora fulva.",
+        "cure": "Apply fungicides and ensure good ventilation.",
+        "medicine_link": "https://www.amazon.in/s?k=tomato+leaf+mold+fungicide&sort=popularity-rank"
+    },
+    {
+        "name": "Tomato___Septoria_leaf_spot",
+        "name_hindi": "टमाटर सेप्टोरिया धब्बा",
+        "cause": "Fungus Septoria lycopersici.",
+        "cure": "Remove infected leaves and apply fungicides.",
+        "medicine_link": "https://www.amazon.in/s?k=tomato+septoria+fungicide&sort=popularity-rank"
+    },
+    {
+        "name": "Tomato___Spider_mites Two-spotted_spider_mite",
+        "name_hindi": "टमाटर मकड़ी घुन",
+        "cause": "Spider mites Tetranychus urticae.",
+        "cure": "Use miticides or insecticidal soaps.",
+        "medicine_link": "https://www.amazon.in/s?k=tomato+spider+mite+miticide&sort=popularity-rank"
+    },
+    {
+        "name": "Tomato___Target_Spot",
+        "name_hindi": "टमाटर लक्ष्य धब्बा",
+        "cause": "Fungus Corynespora cassiicola.",
+        "cure": "Apply fungicides and ensure good air circulation.",
+        "medicine_link": "https://www.amazon.in/s?k=tomato+target+spot+fungicide&sort=popularity-rank"
+    },
+    {
+        "name": "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+        "name_hindi": "टमाटर पीला पत्ता कर्ल वायरस",
+        "cause": "Virus spread by whiteflies.",
+        "cure": "Control whitefly population and use resistant varieties.",
+        "medicine_link": "https://www.amazon.in/s?k=tomato+yellow+leaf+curl+virus+control&sort=popularity-rank"
+    },
+    {
+        "name": "Tomato___Tomato_mosaic_virus",
+        "name_hindi": "टमाटर मोज़ेक वायरस",
+        "cause": "Virus transmitted through contact and contaminated tools.",
+        "cure": "Remove infected plants and sterilize tools.",
+        "medicine_link": "https://www.amazon.in/s?k=tomato+mosaic+virus+control&sort=popularity-rank"
+    },
+    {
+        "name": "Tomato___healthy",
+        "name_hindi": "टमाटर स्वस्थ",
+        "cause": "No disease present.",
+        "cure": "Maintain good cultural practices for optimal health.",
+        "medicine_link": "https://www.amazon.in/s?k=tomato+plant+nutrition+fertilizer&sort=popularity-rank"
+    }
+]

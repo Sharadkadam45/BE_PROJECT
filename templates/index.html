@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomato Disease Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>🍅 Tomato Disease Detector</h1>
+            <p class="sub">Upload a tomato leaf photo to detect disease</p>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="upload-area">
+                    <input type="file" name="image" id="imageInput" accept="image/*" onchange="previewImage(this)">
+                    <label for="imageInput">📁 Click to choose a photo</label>
+                    <p>JPG, PNG supported</p>
+                </div>
+                {% if img_path %}
+                <div class="preview">
+                    <img src="{{ img_path }}" alt="Uploaded leaf">
+                </div>
+                {% endif %}
+                <button type="submit">🔍 Detect Disease</button>
+            </form>
+            {% if result %}
+            <div class="result-card {% if result != 'Tomato___healthy' %}disease{% endif %}">
+                <h3>PREDICTION</h3>
+                <p>{{ result.replace('Tomato___', '').replace('_', ' ') }}</p>
+                <div class="confidence">Confidence: <strong>{{ confidence }}%</strong></div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

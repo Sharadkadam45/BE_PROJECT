@@ -1,0 +1,527 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', 'Noto Sans Devanagari', sans-serif;
+    background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+    min-height: 100vh;
+    color: #333;
+}
+
+a {
+    color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    width: min(1100px, 100% - 40px);
+    margin: 0 auto;
+}
+
+header {
+    background: linear-gradient(135deg, #1b5e20, #2e7d32);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: clamp(2rem, 2.5vw, 3rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+header p {
+    opacity: 0.9;
+    margin-top: 10px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+.user-info {
+    color: #2e7d32;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-buttons a,
+.back-link a,
+button,
+.medicine-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-buttons a,
+.back-link a {
+    padding: 10px 18px;
+    background: #2e7d32;
+    color: white;
+    font-weight: 600;
+}
+
+.nav-buttons a:hover,
+.back-link a:hover,
+button:hover,
+.medicine-btn:hover {
+    transform: translateY(-2px);
+}
+
+.nav-buttons a.info-btn {
+    background: #2196f3;
+}
+
+.nav-buttons a.info-btn:hover {
+    background: #0d47a1;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h2,
+.card h1,
+.info-section h2,
+.disease-section h2,
+.tips-section h2,
+.faq-section h2 {
+    color: #2e7d32;
+}
+
+.farmer-logo {
+    font-weight: 700;
+    color: #2e7d32;
+    font-size: 16px;
+}
+
+.upload-area,
+.signup-card,
+.info-card,
+.disease-card,
+.tip-card,
+.faq-item,
+.result-card {
+    border-radius: 16px;
+}
+
+.upload-area {
+    border: 3px dashed #2e7d32;
+    background: #f9fff9;
+    padding: 40px 20px;
+    cursor: pointer;
+    text-align: center;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-area:hover {
+    background: #e8f5e9;
+    border-color: #1b5e20;
+}
+
+.upload-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.upload-content i {
+    font-size: 60px;
+    color: #2e7d32;
+}
+
+.upload-content span {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.4;
+}
+
+.upload-content .hint {
+    font-size: 14px;
+    color: #666;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+#preview {
+    width: 100%;
+    max-height: 300px;
+    margin-top: 15px;
+    border-radius: 12px;
+    display: none;
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+button:hover {
+    box-shadow: 0 8px 20px rgba(46, 125, 50, 0.3);
+}
+
+.loader {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #c8e6c9;
+    border-top: 4px solid #2e7d32;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.result-card {
+    margin-top: 25px;
+    background: #e8f5e9;
+    padding: 25px;
+    border-left: 5px solid #2e7d32;
+}
+
+.result-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.result-card h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.result-card p,
+.result-card strong {
+    color: #333;
+    line-height: 1.8;
+    margin-bottom: 12px;
+}
+
+.medicine-link {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.medicine-btn {
+    background: #ff6f00;
+    color: white;
+    padding: 12px 20px;
+    font-weight: 600;
+}
+
+.medicine-btn:hover {
+    background: #e65100;
+    box-shadow: 0 4px 12px rgba(255, 111, 0, 0.3);
+}
+
+.warning-box {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 15px;
+    margin-bottom: 15px;
+    color: #856404;
+    font-weight: 500;
+}
+
+.instructions,
+.info-box {
+    background: #e3f2fd;
+    border-left: 4px solid #2196f3;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.instructions h4,
+.info-box p {
+    color: #1565c0;
+}
+
+.instructions ol {
+    margin-left: 20px;
+    color: #0d47a1;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.faq-section {
+    background: white;
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.faq-item {
+    border: 1px solid #e0e0e0;
+}
+
+.faq-question {
+    background: #f5f5f5;
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: #2e7d32;
+}
+
+.faq-answer {
+    padding: 0 15px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    color: #333;
+    line-height: 1.8;
+}
+
+.faq-item.active .faq-answer {
+    padding: 15px;
+    max-height: 500px;
+}
+
+.info-section,
+.disease-section,
+.tips-section {
+    background: white;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.info-grid,
+.disease-grid,
+.tips-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.info-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.disease-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.tips-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.info-card,
+.disease-card,
+.tip-card {
+    padding: 20px;
+}
+
+.info-card {
+    background: #f8f9fa;
+    border-left: 4px solid #2e7d32;
+}
+
+.disease-card {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+}
+
+.tip-card {
+    background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+    text-align: center;
+}
+
+.tip-card i {
+    font-size: 40px;
+    color: #2196f3;
+    margin-bottom: 15px;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 8px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.signup-card {
+    background: white;
+    padding: 40px 30px;
+    max-width: 450px;
+    margin: 0 auto;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+}
+
+.signup-card h1 {
+    color: #2e7d32;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+.signup-card p,
+.signup-card label,
+.signup-card input,
+.signup-card button {
+    width: 100%;
+}
+
+.signup-card p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    color: #2e7d32;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+.hint {
+    display: block;
+    color: #999;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.error {
+    background: #ffebee;
+    color: #c62828;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #c62828;
+}
+
+.error.show {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .navbar,
+    .faq-grid,
+    .main-content,
+    .info-grid,
+    .disease-grid,
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar {
+        flex-direction: column;
+    }
+
+    .back-btn {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-bottom: 20px;
+    }
+}

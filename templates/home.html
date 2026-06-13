@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>टमाटर रोग निदान | TomatoVision</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Noto Sans Devanagari', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        .user-info {
+            color: #2e7d32;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-buttons a {
+            padding: 10px 20px;
+            background: #2e7d32;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+
+        .nav-buttons a:hover {
+            background: #1b5e20;
+            transform: translateY(-2px);
+        }
+
+        .farmer-logo {
+            font-weight: 700;
+            color: #2e7d32;
+            font-size: 16px;
+        }
+
+        .info-btn {
+            background: #2196f3 !important;
+        }
+
+        .info-btn:hover {
+            background: #0d47a1 !important;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .card h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Upload Section */
+        .upload-area {
+            border: 3px dashed #2e7d32;
+            border-radius: 16px;
+            padding: 40px 20px;
+            cursor: pointer;
+            background: #f9fff9;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 250px;
+        }
+
+        .upload-area:hover {
+            background: #e8f5e9;
+            border-color: #1b5e20;
+        }
+
+        .upload-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .upload-content i {
+            font-size: 60px;
+            color: #2e7d32;
+        }
+
+        .upload-content span {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .upload-content .hint {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        #preview {
+            width: 100%;
+            max-height: 300px;
+            margin-top: 15px;
+            border-radius: 12px;
+            display: none;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.3);
+        }
+
+        .loader {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #c8e6c9;
+            border-top: 4px solid #2e7d32;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader p {
+            margin-top: 15px;
+            color: #2e7d32;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        /* Result Card */
+        .result-card {
+            margin-top: 25px;
+            background: #e8f5e9;
+            padding: 25px;
+            border-radius: 16px;
+            animation: fadeIn 0.6s ease;
+            border-left: 5px solid #2e7d32;
+        }
+
+        .result-card img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-card h3 {
+            color: #1b5e20;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .result-card p {
+            color: #333;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .result-card strong {
+            color: #2e7d32;
+        }
+
+        .medicine-link {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .medicine-btn {
+            display: inline-block;
+            background: #ff6f00;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .medicine-btn:hover {
+            background: #e65100;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 111, 0, 0.3);
+        }
+
+        .medicine-btn i {
+            margin-right: 8px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .warning-box p {
+            color: #856404;
+            font-weight: 500;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Instructions */
+        .instructions {
+            background: #e3f2fd;
+            padding: 15px;
+            border-left: 4px solid #2196f3;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .instructions h4 {
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            color: #0d47a1;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .faq-section h2 {
+            color: #2e7d32;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .faq-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            background: #f5f5f5;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #2e7d32;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #e8f5e9;
+        }
+
+        .faq-question i {
+            transition: 0.3s;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 15px;
+            max-height: 500px;
+        }
+
+        /* Info Section */
+        .info-scroll {
+            height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .info-scroll h3 {
+            color: #2e7d32;
+            margin: 15px 0 10px 0;
+            font-size: 16px;
+        }
+
+        .info-scroll ul {
+            margin-left: 20px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .info-scroll {
+                height: auto;
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="user-info">
+            {% if farmer_name %}
+                <i class="fas fa-user-circle"></i> नमस्ते, {{ farmer_name }}!
+            {% else %}
+                <i class="fas fa-tractor"></i> <span class="farmer-logo">किसान मित्र</span>
+            {% endif %}
+        </div>
+        <div class="nav-buttons">
+            <a href="/information" class="info-btn"><i class="fas fa-info-circle"></i> जानकारी</a>
+            {% if farmer_name %}
+                <a href="/logout"><i class="fas fa-sign-out-alt"></i> लॉग आउट</a>
+            {% else %}
+                <a href="/signup"><i class="fas fa-user-plus"></i> साइन अप करें</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <header>
+        <h1><i class="fas fa-leaf"></i> फसल रोग निदान</h1>
+        <p>TomatoVision - अपने टमाटर के पत्तों की जांच करें</p>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <!-- Upload Section -->
+            <div class="card">
+                <h2><i class="fas fa-cloud-upload-alt"></i> छवि अपलोड करें</h2>
+
+                <div class="instructions">
+                    <h4><i class="fas fa-lightbulb"></i> सुझाव:</h4>
+                    <ol>
+                        <li>स्वस्थ टमाटर के पत्ते अपलोड करें</li>
+                        <li>अच्छी रोशनी में स्पष्ट फोटो लें</li>
+                        <li>रोगग्रस्त हिस्से को करीब से दिखाएं</li>
+                        <li>पत्ते को समतल रखकर फोटो लें</li>
+                    </ol>
+                </div>
+
+                <form action="/upload/" method="POST" enctype="multipart/form-data" onsubmit="showLoader()">
+                    <label class="upload-area">
+                        <div class="upload-content">
+                            <i class="fas fa-camera"></i>
+                            <span>फोटो अपलोड करने के लिए क्लिक करें</span>
+                            <span class="hint">(JPG या PNG - अधिकतम 5MB)</span>
+                        </div>
+                        <input type="file" name="img" accept="image/png, image/jpeg" required onchange="previewImage(event)">
+                    </label>
+
+                    <img id="preview" alt="Preview">
+
+                    <button type="submit">
+                        <i class="fas fa-search"></i> पत्ते का विश्लेषण करें
+                    </button>
+
+                    <div class="loader" id="loader">
+                        <div class="spinner"></div>
+                        <p>विश्लेषण जारी है...</p>
+                    </div>
+                </form>
+
+                {% if result %}
+                    <div class="result-card">
+                        <img src="{{imagepath}}" alt="Analyzed Image">
+
+                        {% if prediction_result.status == 'success' %}
+
+                            <h3><i class="fas fa-disease"></i> {{ prediction_result.label['name'] }}</h3>
+                            <h4 style="color: #2e7d32; margin-top: 5px;"><i class="fas fa-language"></i> {{ prediction_result.label['name_hindi'] }}</h4>
+                            
+                            <p>
+                                <strong>कारण:</strong><br>
+                                {{ prediction_result.label['cause'] }}
+                            </p>
+                            
+                            <p>
+                                <strong>उपचार:</strong><br>
+                                {{ prediction_result.label['cure'] }}
+                            </p>
+
+                            <div class="medicine-link">
+                                <a href="{{ prediction_result.label['medicine_link'] }}" target="_blank" class="medicine-btn">
+                                    <i class="fas fa-shopping-cart"></i> दवा खरीदें
+                                </a>
+                            </div>
+
+                        {% elif prediction_result.status == 'low_confidence' %}
+                            <h3><i class="fas fa-disease"></i> {{ prediction_result.label['name'] }}</h3>
+                            <h4 style="color: #2e7d32; margin-top: 5px;"><i class="fas fa-language"></i> {{ prediction_result.label['name_hindi'] }}</h4>
+
+                            <p>
+                                <strong>कारण:</strong><br>
+                                {{ prediction_result.label['cause'] }}
+                            </p>
+                            
+                            <p>
+                                <strong>उपचार:</strong><br>
+                                {{ prediction_result.label['cure'] }}
+                            </p>
+
+                            <div class="medicine-link">
+                                <a href="{{ prediction_result.label['medicine_link'] }}" target="_blank" class="medicine-btn">
+                                    <i class="fas fa-shopping-cart"></i> दवा खरीदें
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Info Section -->
+            <div class="card">
+                <h2><i class="fas fa-info-circle"></i> जानकारी</h2>
+                
+                <div class="info-scroll">
+                    <h3 style="color: #2e7d32;">
+                        <i class="fas fa-check-circle"></i> स्वस्थ पत्ते की विशेषताएं:
+                    </h3>
+                    <ul>
+                        <li>हरे रंग की समान सतह</li>
+                        <li>कोई धब्बे या घाव नहीं</li>
+                        <li>पत्तों में लचक</li>
+                        <li>कोई कीड़े नहीं दिखें</li>
+                    </ul>
+
+                    <h3 style="color: #2e7d32;">
+                        <i class="fas fa-bug"></i> सामान्य टमाटर के रोग:
+                    </h3>
+                    <ul>
+                        <li><strong>जल्दी झुलसा:</strong> काले धब्बे के साथ</li>
+                        <li><strong>देरी झुलसा:</strong> पानी जैसे धब्बे</li>
+                        <li><strong>जीवाण संक्रमण:</strong> तेल जैसे धब्बे</li>
+                        <li><strong>वायरल संक्रमण:</strong> पत्तियों का मुड़ना</li>
+                        <li><strong>कीटों का नुकसान:</strong> छिद्र और हल्की पत्तियां</li>
+                    </ul>
+
+                    <h3 style="color: #2e7d32;">
+                        <i class="fas fa-shield-alt"></i> रोकथाम के उपाय:
+                    </h3>
+                    <ul>
+                        <li>फसल का सही घुमाव करें</li>
+                        <li>स्वस्थ बीज का उपयोग करें</li>
+                        <li>उचित जल निकासी रखें</li>
+                        <li>खरपतवार हटाते रहें</li>
+                        <li>संक्रमित पत्तों को तोड़ दें</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2><i class="fas fa-question-circle"></i> अक्सर पूछे जाने वाले प्रश्न (FAQ)</h2>
+            
+            <div class="faq-grid">
+                <!-- Question 1 -->
+                <div class="faq-item active">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>यह ऐप्स कैसे काम करता है?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        इस ऐप्स में कृत्रिम बुद्धिमत्ता (AI) का उपयोग करके टमाटर के पत्तों की फोटो से रोग की पहचान की जाती है। आप अपने फोन से फोटो खींचकर अपलोड करें और तुरंत परिणाम प्राप्त करें।
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>सही फोटो कैसे खींचें?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        🌞 अच्छी रोशनी में फोटो खींचें। टमाटर के पत्ते को सीधा रखें। रोगग्रस्त हिस्से को नजदीक से दिखाएं। पत्ता समतल हो तो बेहतर है। फोन स्थिर रखकर फोटो लें।
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>क्या मुझे साइन अप करना जरूरी है?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        नहीं, साइन अप करना जरूरी नहीं है। आप बिना लॉगिन किए ही ऐप्स का उपयोग कर सकते हैं। साइन अप करने से आपका अनुभव बेहतर हो सकता है।
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>मुझे का परिणाम गलत दिख रहा है?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        यह कई कारणों से हो सकता है: (1) फोटो धुंधली हो (2) पत्ती पूरी तरह दिखाई न दे रही हो (3) रोग की शुरुआत हो। बेहतर फोटो के साथ कोशिश करें। संदेह में किसान मदद लाइन से संपर्क करें।
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>दवा खरीदने के लिए कहां जाएं?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        आप अपने नजदीकी कृषि फसल दुकान से दवा खरीद सकते हैं। ऑनलाइन भी कई कृषि वेबसाइटों से दवा मिलती है। हमेशा अपने स्थानीय कृषि अधिकारी से सलाह लें।
+                    </div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>क्या यह पूरी तरह सुरक्षित है?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        हां, यह पूरी तरह सुरक्षित है। आपकी व्यक्तिगत जानकारी सुरक्षित रखी जाती है। अपलोड की गई फोटो का उपयोग केवल विश्लेषण के लिए होता है।
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>अंग्रेजी में जानकारी कैसे प्राप्त करें?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        परिणाम में दिया गया रोग का नाम, कारण और उपचार पूरी तरह अंग्रेजी में है। इस पेज को ब्राउजर के अनुवाद विकल्प से अनुवाद कर सकते हैं।
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>समस्या होने पर कहां संपर्क करें?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        किसी भी समस्या के लिए अपने जिला कृषि विभाग से संपर्क करें। या अपने नजदीकी कृषि विज्ञान केंद्र से सलाह लें। हम नियमित रूप से ऐप्स को अपडेट करते रहते हैं।
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const preview = document.getElementById('preview');
+                preview.src = reader.result;
+                preview.style.display = "block";
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function showLoader() {
+            document.getElementById('loader').style.display = "block";
+        }
+
+        function toggleFAQ(element) {
+            const item = element.parentElement;
+            const allItems = document.querySelectorAll('.faq-item');
+            
+            allItems.forEach(faq => {
+                if (faq !== item) {
+                    faq.classList.remove('active');
+                }
+            });
+            
+            item.classList.toggle('active');
+        }
+    </script>
+
+</body>
+
+</html>

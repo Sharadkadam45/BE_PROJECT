@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>टमाटर की जानकारी | Tomato Information</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Noto Sans Devanagari', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .info-section {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .info-section h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #2e7d32;
+        }
+
+        .info-card h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-card li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .info-card li:before {
+            content: "✓";
+            color: #2e7d32;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .disease-section {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .disease-section h2 {
+            color: #2e7d32;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        .disease-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .disease-card {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 12px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .disease-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .disease-card h3 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .disease-card p {
+            margin-bottom: 8px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .disease-card strong {
+            color: #2e7d32;
+        }
+
+        .tips-section {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .tips-section h2 {
+            color: #2e7d32;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 28px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .tip-card:hover {
+            transform: scale(1.05);
+        }
+
+        .tip-card i {
+            font-size: 40px;
+            color: #2196f3;
+            margin-bottom: 15px;
+        }
+
+        .tip-card h3 {
+            color: #0d47a1;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .tip-card p {
+            color: #333;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .info-grid, .disease-grid, .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .back-btn {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-bottom: 20px;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="/" class="back-btn">
+        <i class="fas fa-arrow-left"></i> वापस जाएं
+    </a>
+
+    <header>
+        <h1><i class="fas fa-leaf"></i> टमाटर की पूरी जानकारी</h1>
+        <p>Tomato Information - किसान के लिए आसान भाषा में</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Basic Information -->
+        <div class="info-section">
+            <h2><i class="fas fa-seedling"></i> टमाटर के बारे में बुनियादी जानकारी</h2>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-info-circle"></i> क्या है टमाटर?</h3>
+                    <ul>
+                        <li>टमाटर एक सब्जी है जो फल की तरह दिखती है</li>
+                        <li>यह लाल, गोल या लंबा हो सकता है</li>
+                        <li>गर्मियों में सबसे अच्छा उगता है</li>
+                        <li>स्वादिष्ट और सेहत के लिए बहुत फायदेमंद</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-sun"></i> कब बोएं?</h3>
+                    <ul>
+                        <li>सर्दियों के अंत में या गर्मियों की शुरुआत में</li>
+                        <li>अक्टूबर से फरवरी तक सबसे अच्छा समय</li>
+                        <li>तापमान 15-25 डिग्री सेल्सियस होना चाहिए</li>
+                        <li>बारिश कम होने का समय चुनें</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-water"></i> पानी की जरूरत</h3>
+                    <ul>
+                        <li>सप्ताह में 2-3 बार पानी दें</li>
+                        <li>जड़ों तक पानी पहुंचे, पत्तों पर न गिरे</li>
+                        <li>सुबह या शाम को पानी दें</li>
+                        <li>बारिश के दिनों में पानी कम करें</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-tint"></i> खाद और उर्वरक</h3>
+                    <ul>
+                        <li>गोबर की खाद सबसे अच्छी</li>
+                        <li>फूल आने से पहले फास्फोरस दें</li>
+                        <li>फल आने पर पोटाश दें</li>
+                        <li>हर 15 दिनों में खाद डालें</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Common Diseases -->
+        <div class="disease-section">
+            <h2><i class="fas fa-bug"></i> टमाटर के सामान्य रोग</h2>
+
+            <div class="disease-grid">
+                <div class="disease-card">
+                    <h3>जल्दी झुलसा (Early Blight)</h3>
+                    <p><strong>लक्षण:</strong> पत्तों पर काले धब्बे, पीले रंग के घेरे</p>
+                    <p><strong>कारण:</strong> फफूंदी (Alternaria solani)</p>
+                    <p><strong>उपचार:</strong> फफूंदीनाशी दवा लगाएं, संक्रमित पत्ते हटाएं</p>
+                </div>
+
+                <div class="disease-card">
+                    <h3>देरी झुलसा (Late Blight)</h3>
+                    <p><strong>लक्षण:</strong> पत्तों पर पानी जैसे धब्बे, सफेद फफूंद</p>
+                    <p><strong>कारण:</strong> रोगजनक (Phytophthora infestans)</p>
+                    <p><strong>उपचार:</strong> प्रतिरोधी किस्में इस्तेमाल करें, फफूंदीनाशी लगाएं</p>
+                </div>
+
+                <div class="disease-card">
+                    <h3>जीवाणु धब्बा (Bacterial Spot)</h3>
+                    <p><strong>लक्षण:</strong> छोटे काले धब्बे, तेल जैसे दिखते हैं</p>
+                    <p><strong>कारण:</strong> जीवाणु (Xanthomonas spp.)</p>
+                    <p><strong>उपचार:</strong> कॉपर-आधारित दवा लगाएं, फसल चक्र अपनाएं</p>
+                </div>
+
+                <div class="disease-card">
+                    <h3>पत्ती ढाले (Leaf Mold)</h3>
+                    <p><strong>लक्षण:</strong> पत्तों पर पीले धब्बे, पीछे फफूंद</p>
+                    <p><strong>कारण:</strong> फफूंदी (Passalora fulva)</p>
+                    <p><strong>उपचार:</strong> फफूंदीनाशी लगाएं, अच्छी हवा निकासी रखें</p>
+                </div>
+
+                <div class="disease-card">
+                    <h3>सेप्टोरिया धब्बा (Septoria Leaf Spot)</h3>
+                    <p><strong>लक्षण:</strong> छोटे गोल धब्बे, बीच में काला बिंदु</p>
+                    <p><strong>कारण:</strong> फफूंदी (Septoria lycopersici)</p>
+                    <p><strong>उपचार:</strong> संक्रमित पत्ते हटाएं, फफूंदीनाशी लगाएं</p>
+                </div>
+
+                <div class="disease-card">
+                    <h3>मकड़ी घुन (Spider Mites)</h3>
+                    <p><strong>लक्षण:</strong> पत्तों पर छोटे छिद्र, सफेद बिंदु</p>
+                    <p><strong>कारण:</strong> मकड़ी घुन (Tetranychus urticae)</p>
+                    <p><strong>उपचार:</strong> कीटनाशी या साबुन का घोल लगाएं</p>
+                </div>
+
+                <div class="disease-card">
+                    <h3>लक्ष्य धब्बा (Target Spot)</h3>
+                    <p><strong>लक्षण:</strong> गोल धब्बे, बीच में गहरा रंग</p>
+                    <p><strong>कारण:</strong> फफूंदी (Corynespora cassiicola)</p>
+                    <p><strong>उपचार:</strong> फफूंदीनाशी लगाएं, हवा का अच्छा प्रवाह रखें</p>
+                </div>
+
+                <div class="disease-card">
+                    <h3>पीला पत्ता कर्ल वायरस (Yellow Leaf Curl)</h3>
+                    <p><strong>लक्षण:</strong> पत्ते मुड़ जाते हैं, पीले रंग के होते हैं</p>
+                    <p><strong>कारण:</strong> वायरस (सफेद मक्खी से फैलता है)</p>
+                    <p><strong>उपचार:</strong> सफेद मक्खी को नियंत्रित करें, प्रतिरोधी किस्में लगाएं</p>
+                </div>
+
+                <div class="disease-card">
+                    <h3>टमाटर मोज़ेक वायरस (Mosaic Virus)</h3>
+                    <p><strong>लक्षण:</strong> पत्तों पर हरे-पीले धब्बे, पौधा विकृत</p>
+                    <p><strong>कारण:</strong> वायरस (संपर्क या औजारों से फैलता है)</p>
+                    <p><strong>उपचार:</strong> संक्रमित पौधे हटाएं, औजारों को कीटाणुरहित करें</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="tips-section">
+            <h2><i class="fas fa-lightbulb"></i> टमाटर उगाने के टिप्स</h2>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <i class="fas fa-sun"></i>
+                    <h3>रोशनी</h3>
+                    <p>टमाटर को कम से कम 6-8 घंटे धूप चाहिए। छाया में कम फल लगते हैं।</p>
+                </div>
+
+                <div class="tip-card">
+                    <i class="fas fa-wind"></i>
+                    <h3>हवा</h3>
+                    <p>अच्छी हवा की आवाजाही जरूरी है। भीड़ भरे पौधों में रोग जल्दी फैलते हैं।</p>
+                </div>
+
+                <div class="tip-card">
+                    <i class="fas fa-tint"></i>
+                    <h3>मिट्टी</h3>
+                    <p>मिट्टी में अच्छी नमी होनी चाहिए। बहुत गीली या सूखी मिट्टी से रोग होते हैं।</p>
+                </div>
+
+                <div class="tip-card">
+                    <i class="fas fa-seedling"></i>
+                    <h3>बीज</h3>
+                    <p>स्वस्थ बीज इस्तेमाल करें। पुराने या संक्रमित बीज से रोगी पौधे उगते हैं।</p>
+                </div>
+
+                <div class="tip-card">
+                    <i class="fas fa-cut"></i>
+                    <h3>छंटाई</h3>
+                    <p>अतिरिक्त पत्ते और टहनियां हटाएं। इससे पौधा मजबूत होता है और रोग कम होते हैं।</p>
+                </div>
+
+                <div class="tip-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>रोकथाम</h3>
+                    <p>रोग आने से पहले ही दवा लगाएं। संक्रमित पौधों को तुरंत हटाएं।</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
